@@ -1,0 +1,43 @@
+def identify_language(text):
+    # Character frequency analysis for different languages
+    languages = {
+        "english": "abcdefghijklmnopqrstuvwxyz",
+        "spanish": "abcdefghijklmnñopqrstuvwxyz",
+        "french": "abcdefghijklmnopqrstuvwxyzàâæçéèêëîïôœùûüÿ",
+        "german": "abcdefghijklmnopqrstuvwxyzäöüß",
+        "tamil": "அஆஇஈஉஊஎஏஐஒஓஔகஙசஞடணதநனபமயரலவழளழறஹாிீுூெேைொோௌ்ௗ",
+        "telugu": "అఆఇఈఉఊఋౠఌౡఎఏఐఒఓఔకఖగఘఙచఛజఝఞటఠడఢణతథదధనపఫబభమయరఱలళవశషసహ్",
+        "malayalam": "അആഇഈഉഊഋൠഌൡഎഏഐഒഓഔകഖഗഘങചഛജഝഞടഠഡഢണതഥദധനപഫബഭമയരറലളഴവശഷസഹാിീുൂൃൄെേൈൊോൌ്ൗൠൡൺൻർൽൾൿ",
+        "kannada": "ಅಆಇಈಉಊಋೠಌೡಎಏಐಒಓಔಕಖಗಘಙಚಛಜಝಞಟಠಡಢಣತಥದಧನಪಫಬಭಮಯರಱಲಳವಶಷಸಹ್",
+        "hindi": "अआइईउऊऋॠऌॡएऐओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरऱलळवशषसहािीुूृॄॅॆेैॉॊोौ्ॐ।॥",
+        "japanese": "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん",
+        "marathi": "ँंःअआइईउऊऋऌऍएऐऑऒओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलळवशषसह़ािीुूृॄॅॆेैॉॊोौ्ॐ।॥",
+        "gujarati": "અઆઇઈઉઊઋઌઍએઐઑ઒ઓઔકખગઘઙચછજઝઞટઠડઢણતથદધનપફબભમયર઱લળવશષસહાિીુૂૃૄૅ૆ેૈૉ૊ોૌ્ૐૡૢૣ",
+        "punjabi": "ਅਆਇਈਉਊਏਐਓਔਕਖਗਘਙਚਛਜਝਞਟਠਡਢਣਤਥਦਧਨਪਫਬਭਮਯਰਲਲ਼ਵਸਹਾਿੀੁੂੇੈੋੌ੍ੰੱੲੳਅੲਸੱੲ",
+        # Add more languages as needed
+    }
+
+    # Remove whitespace and punctuation
+    text = ''.join(char for char in text.lower() if char.isalpha())
+
+    # Count characters in the text
+    char_count = {}
+    for char in text:
+        char_count[char] = char_count.get(char, 0) + 1
+
+    # Calculate frequency scores for each language
+    scores = {}
+    for lang, charset in languages.items():
+        score = sum(char_count.get(char, 0) for char in charset)
+        scores[lang] = score
+
+    # Identify the language with the highest score
+    identified_language = max(scores, key=scores.get)
+    return identified_language
+
+# Prompt the user to enter text
+user_text = input("Enter text in the language of your choice: ")
+
+# Identify the language of the entered text
+identified_language = identify_language(user_text)
+print(f"Identified Language: {identified_language}")
